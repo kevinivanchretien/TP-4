@@ -9,81 +9,81 @@ E.	Si el importe final con descuento suma más de $120  se debe sumar un 10% de 
 
  */
 function CalcularPrecio() {
-    let vLampara;
-    let Suma;
-    let vMarca;
-    let vParcial;
+    let vCantidad = parseInt(document.getElementById("txtIdCantidad").value);
+    let vModelo = document.getElementById("Marca").value;
+    const Precio = 35;
+    let Parcial;
     let vDescuento;
-    
-    let vFinal = parseInt;
-    let vIIBB;
+    let PrecioFinal;
+    let IIBB;
 
-    
-    vLampara = parseInt(document.getElementById("txtIdCantidad").value);
-    vMarca = document.getElementById("Marca").value;
-    Suma = vLampara * 35;
+    Parcial = vCantidad * Precio;
 
-
-    if (vLampara >= 6) {
-        vParcial= (Suma *50)/100;
-        vDescuento= Suma -vParcial;
-
-        vFinal = vDescuento;
-
-        document.getElementById("txtIdprecioDescuento").value = vFinal;
+    if (vCantidad >= 6) {
+        Descuento = (Parcial * 50) / 100;
+        PrecioFinal = Parcial - Descuento;
     }
-    if (vLampara == 5 && vMarca === "ArgentinaLuz") {
-        vParcial = (Suma *40)/100;
-        vDescuento = Suma -vParcial  
-        vFinal =  vDescuento
-        document.getElementById("txtIdprecioDescuento").value = vFinal;
-    }
-    else if (vLampara == 5 && vMarcar !="ArgentinaLuz"){
-        vParcial = (Suma * 30)/100
-        vDescuento = Suma - vParcial;
-        vFinal = vDescuento;
-        document.getElementById("txtIdprecioDescuento").value = vFinal;
-    }
-    if (vLampara == 4){
-        if(vMarca == "ArgentinaLuz" && vMarca == "FelipeLuz"){
-            vParcial=(Suma*25)/100;
-            vDescuento=Suma - vParcial;
-            vFinal= vDescuento;
-            document.getElementById("txtIdprecioDescuento").value = vFinal;
-            if (vLampara == 3){
-                if(vMarca == "ArgentinaLuz"){
-                    vParcial=(Suma*15)/100;
-                    vDescuento=Suma - vParcial;
-                    vFinal= vDescuento;
-                    document.getElementById("txtIdprecioDescuento").value = vFinal;
-                }
-                if (vMarca == "FelipeLuz"){
-                    vParcial=(Suma*10)/100;
-                    vDescuento=Suma - vParcial;
-                    vFinal= vDescuento;
-                    document.getElementById("txtIdprecioDescuento").value = vFinal;
-                }
-                else { vParcial=(Suma*5)/100;
-                vDescuento=Suma - vParcial;
-                vFinal= vDescuento;
-                document.getElementById("txtIdprecioDescuento").value = vFinal;
-                }
-            }
-
-            
-
+    //. Si compra 5 lamparitas bajo consumo marca "ArgentinaLuz" 
+    //se hace un descuento del 40 % 
+    //y si es de otra marca el descuento es del 30%.
+    else if (vCantidad == 5) {
+        if (vModelo == "ArgentinaLuz") {
+            Descuento = (Parcial * 40) / 100;
+            PrecioFinal = Parcial - Descuento;
         }
-        
+        else {
+            Descuento = (Parcial * 30) / 100;
+            PrecioFinal = Parcial - Descuento;
+        }
     }
+    //. Si compra 4 lamparitas bajo consumo marca 
+    //"ArgentinaLuz" o “FelipeLamparas” se hace un descuento del 25 % y
+    // si es de otra marca el descuento es del 20%.
+    else if (vCantidad == 4) {
+        if (vModelo == "ArgentinaLuz" || vModelo == "FelipeLamparas") {
+            Descuento = (Parcial * 25) / 100;
+            PrecioFinal = Parcial - Descuento;
+        }
+        else {
+            Descuento = (Parcial * 20) / 100;
+            PrecioFinal = Parcial - Descuento;
+        }
 
+    }
+    //Si compra 3 lamparitas bajo consumo marca "ArgentinaLuz" el descuento es del 15%,
+    // si es “FelipeLamparas” se hace un descuento del 10 %
+    // y si es de otra marca un 5%.
+    else if (vCantidad == 3) {
+        if (vModelo == "ArgentinaLuz") {
+            Descuento = (Parcial * 15) / 100;
+            PrecioFinal = Parcial - Descuento;
+        }
+        else if (vModelo == "FelipeLamparas") {
+            Descuento = (Parcial * 10) / 100;
+            PrecioFinal = Parcial - Descuento;
+        }
+        else {
+            Descuento = (Parcial * 5) / 100;
+            PrecioFinal = Parcial - Descuento;
+        }
 
-    
+    }
+    if (vCantidad == 2) {
+        PrecioFinal = Parcial;
+    }
+    // Si el importe final con descuento suma más de $120 
+    //se debe sumar un 10% de ingresos brutos en informar del impuesto 
+    //con el siguiente mensaje: ”IIBB Usted pago X”, siendo X el impuesto que se pagó.
+    if (PrecioFinal > 120) {
+        IIBB = PrecioFinal + ((PrecioFinal * 0.10) / 100);
 
-
-
+        document.getElementById("txtIdprecioDescuento").value = `Usted pago $${IIBB}`;
+    }
+    else {
+        document.getElementById("txtIdprecioDescuento").value = `Usted pago $${PrecioFinal}`;
+    }
 
 }
-
 
 
 
